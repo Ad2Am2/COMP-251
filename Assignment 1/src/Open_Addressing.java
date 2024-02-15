@@ -40,15 +40,29 @@ public class Open_Addressing {
      }
         /**Implements the hash function g(k)*/
         public int probe(int key, int i) {
-            //TODO: implement this function and change the return statement.
-        return -1;
-     }
+            int chaining = ((A*key)%(power2(w))) >> (w-r);
+
+            return (chaining + i) % (power2(r));
+        }
      
      
      /**Inserts key k into hash table. Returns the number of collisions encountered*/
-        public int insertKey(int key){
-            //TODO : implement this and change the return statement.
-            return -1;  
+        public int insertKey(int key) {
+
+            int collisions = 0;
+
+            for (int i = 0; i < power2(r); i++) {
+                int probe = probe(key, i);
+
+                if (Table[probe] == -2 || Table[probe] == -1) {
+                    Table[probe] = key;
+                    return collisions;
+                }
+
+                collisions++;
+            }
+
+            return collisions;
         }
         
         /**Sequentially inserts a list of keys into the HashTable. Outputs total number of collisions */
@@ -62,8 +76,20 @@ public class Open_Addressing {
             
          /**Removes key k from the hash table. Returns the number of collisions encountered*/
         public int removeKey(int key){
-            //TODO: implement this and change the return statement
+            int visits = 0;
+
+            for (int i = 0; i < power2(r); i++) {
+                int probe = probe(key, i);
+                if (Table[probe] == key) {
+                    Table[probe] = -2;
+                    return visits;
+                } if (Table[probe(key, i)] == -1) {
+                    visits ++;
+                    return visits;
+                }
+                visits++;
+            }
                 
-            return -1;
+            return visits;
         }
 }

@@ -27,7 +27,7 @@ public class DisjointSets {
             }
         }
     }
-    
+
     public String toString(){
         int pari,countsets=0;
         String output = "";
@@ -51,25 +51,37 @@ public class DisjointSets {
         }
         return output;
     }
-    
+
     /* find resentative of element i */
     public int find(int i) {
-
-        /* Fill this method (The statement return 0 is here only to compile) */
-        return 0;
-        
+        if (par[i] == i) {
+            return i;
+        } else {
+            par[i] = find(par[i]);
+            return par[i];
+        }
     }
 
     /* merge sets containing elements i and j */
     public int union(int i, int j) {
-    
-        /* Fill this method (The statement return 0 is here only to compile) */
-        return 0;
-        
+
+        if (find(i) == find(j)) {
+            return find(i);
+        } else if (rank[find(i)] > rank[find(j)]) {
+            par[find(j)] = find(i);
+            return find(i);
+        } else {
+            par[find(i)] = find(j);
+
+            if (rank[find(i)] == rank[find(j)])
+                rank[find(j)]++;
+
+            return find(j);
+        }
     }
-    
+
     public static void main(String[] args) {
-        
+
         DisjointSets myset = new DisjointSets(6);
         System.out.println(myset);
         System.out.println("-> Union 2 and 3");
