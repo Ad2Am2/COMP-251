@@ -2,13 +2,13 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 public class Game {
-	
+
 	public Board sudoku;
-	
+
 	public class Cell{
 		private int row = 0;
 		private int column = 0;
-		
+
 		public Cell(int row, int column) {
 			this.row = row;
 			this.column = column;
@@ -20,7 +20,7 @@ public class Game {
 			return column;
 		}
 	}
-	
+
 	public class Region{
 		private Cell[] matrix;
 		private int num_cells;
@@ -34,16 +34,16 @@ public class Game {
 		public void setCell(int pos, Cell element){
 			matrix[pos] = element;
 		}
-		
+
 	}
-	
+
 	public class Board{
 		private int[][] board_values;
 		private Region[] board_regions;
 		private int num_rows;
 		private int num_columns;
 		private int num_regions;
-		
+
 		public Board(int num_rows,int num_columns, int num_regions){
 			this.board_values = new int[num_rows][num_columns];
 			this.board_regions = new Region[num_regions];
@@ -51,7 +51,7 @@ public class Game {
 			this.num_columns = num_columns;
 			this.num_regions = num_regions;
 		}
-		
+
 		public int[][] getValues(){
 			return board_values;
 		}
@@ -69,7 +69,7 @@ public class Game {
 		}
 		public void setRegion(int index, Region initial_region) {
 			board_regions[index] = initial_region;
-		}	
+		}
 		public void setValues(int[][] values) {
 			board_values = values;
 		}
@@ -222,12 +222,12 @@ public class Game {
 					}catch(Exception e) {
 						System.out.println("Ups, something went wrong");
 					}
-				}	
+				}
 			}
 		}
 		int regions = sc.nextInt();
 		Game game = new Game();
-	    game.sudoku = game.new Board(rows, columns, regions);
+		game.sudoku = game.new Board(rows, columns, regions);
 		game.sudoku.setValues(board);
 		for (int i=0; i< regions;i++) {
 			int num_cells = sc.nextInt();
@@ -252,7 +252,7 @@ public class Game {
 			System.out.println();
 		}
 	}
-	
+
 
 
 }
